@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
-import Formik from 'formik';
-import Yup from 'yup';
+import {Form, Field, withFormik} from 'formik';
+import * as Yup from 'yup';
 import axios from 'axios';
 
 
@@ -36,12 +36,21 @@ return (
             </label>
             <button type="submit">Submit</button>
         </Form>
+        {users.map(user => (
+            <ul key={user.id}>
+            <li>Name: {user.name}</li>
+            <li>Email: {user.email}</li>
+            </ul>
+        ))}
         
-    </div>
+         </div>
+        );
+    };
 
-    <Formik 
-        render={props => {
-            return(
+    const FormikForm = withFormik({
+        mapPropstoValues({name, email, password, termsofservice}) {
+        
+            return{
                name: name || '',
                email: email || '',
                password: password || '',
@@ -50,7 +59,7 @@ return (
         };
     },
 
-        vlidationSchema: Yup.object().shape({
+        validationSchema: Yup.object().shape({
             name: Yup.string().required(),
             email: Yup.string().required(),
             password: Yup.string().required(),
