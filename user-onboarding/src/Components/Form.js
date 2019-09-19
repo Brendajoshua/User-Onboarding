@@ -16,18 +16,27 @@ return (
     <div className="user-form">
         <h1>User Form</h1>
         <Form>
+            <label>
+                Name
             <Field type="text" name="name" palceholder="name" />
             {touched.name && errors.name && (
                 <p className="error">{errors.name}</p>
             )}
+            </label>
+            <label>
+                Email
             <Field type="email" name="email" palceholder="name@example.com" />
             {touched.email && errors.email && (
                 <p className="error">{errors.email}</p>
             )}
+            </label>
+            <label>
+                PassWord
             <Field type="password" name="password" palceholder="password" />
             {touched.password && errors.password && (
                 <p className="error">{errors.password}</p>
             )}
+            </label>
             
             <label className="checkbox-container">
                 Terms Of service
