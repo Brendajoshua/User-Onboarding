@@ -47,8 +47,8 @@ return (
                password: password || '',
                termsofservice: termsofservice || false 
         
-        }})
-        </Formik>
+        };
+    },
 
         vlidationSchema: Yup.object().shape({
             name: Yup.string().required(),
@@ -56,9 +56,16 @@ return (
             password: Yup.string().required(),
             termsofservice: Yup.boolean().oneOf([true, 'Must accept Terms'])
         }),
-    
-)
-}
-}
 
-export default Form;
+        handleSubmit(values, {setStatus}) {
+            axios
+            .post("https://reqres.in/api/users/", values)
+            .then(response => {
+                setStatus(response.data);
+            })
+            .catch(error => console.log(error.response));
+        }
+    
+})(UserForm);
+
+export default FormikForm;
